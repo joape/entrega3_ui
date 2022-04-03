@@ -1,0 +1,16 @@
+{
+    "servilletas": [
+        { "id": 1, "codigo": "INS400", "imagen": "servilleta1.jpg", "origen": "China", "tamaño": "30x30", "cantidad": "320", "precio": "15" },
+        { "id": 2, "codigo": "FLO400", "imagen": "servilleta2.jpg", "origen": "China", "tamaño": "30x30", "cantidad": "250", "precio": "15" },
+        { "id": 3, "codigo": "ANI400", "imagen": "servilleta3.jpg", "origen": "China", "tamaño": "30x30", "cantidad": "120", "precio": "15" },
+        { "id": 4, "codigo": "ANI500", "imagen": "servilleta4.jpg", "origen": "China", "tamaño": "30x30", "cantidad": "200", "precio": "15" }
+	],
+	"usuarios": [
+        { "id": 1, "nombre": "Joaquin", "apellido": "Pedrozo", "email": "joaquin.pedrozo@gmail.com" },
+		{ "id": 2, "nombre": "Gustavo", "apellido": "Rodriguez", "email": "gustavo.rodriguez@gmail.com" },
+		{ "id": 3, "nombre": "Senpai", "apellido": "Senpai", "email": "Senpai.academy@gmail.com" }
+	],
+	"promociones": [
+        { "id": 1, "texto": "Promocion de Febrero !!!" }		
+	]
+}
