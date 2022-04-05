@@ -15,7 +15,7 @@ export function SeccionPromociones(){
         });
     }, []);
     
-    console.log(Promocion);
+    //console.log(Promocion);
     const texto = Promocion.texto;
     
     return (
