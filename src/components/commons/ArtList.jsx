@@ -9,14 +9,15 @@ export function ArtList(){
    
     //Voy a buscar la informacion al servidor
     useEffect(() => {
-        //Fetch / GET a JSON Servilletas
-        api.get("/servilletas").then(function (response) {
+        //Fetch / GET a JSON Servilletas antes, ahora a la API que se conecta a la BBDD
+        api.get("/productos").then((response)=> {
         const prods = response.data;
        
-        //Cambiamos el estado para que react lo re dibuje
+        //Cambiamos el estado para que react lo re dibuje con lo que trajo de la API
         setListadoProds(prods);
         });
-    }, []);
+    }, []);/*Pongo un array vacio al final para que se ejecute una sola vez */
+
     /*Funcion que mapea cada elemento del array*/
     const artItems = listadoProds.map(function (prod) {   
         return(
