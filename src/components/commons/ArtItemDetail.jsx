@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export function ArtItemDetail(){//aca se va a conectar a la BBDD y traera los productos
   
-    const {id} = useParams(); //capturo el parametro
+    const {id} = useParams(); //capturo el parametro. Si saco el id de entre las llaves no carga las imagenes
     //console.log(id)//
     
     const [Producto, setProducto] = useState([]);
