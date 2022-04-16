@@ -165,27 +165,10 @@ a {
     object-fit: cover;
 }
 
-.articulos .articulo h2,
 .articulos .articulo p {
     padding: 10px 10px 0px 10px;
     text-align: justify;
 }
-
-
-/*.articulos .articulo input[type=button] {
-    background-color: #858282;
-    border: solid;
-    color: #130831;
-    padding: 10px 22px;
-    text-decoration: none;
-    margin: 4px 2px;
-    cursor: pointer;
-    /*cambia puntero
-    font-family: Tahoma;
-    font-weight: bold;
-    border-radius: 50px;
-    position: static;
-}*/
 
 .articulos .articulo .vermasbtn {
     background-color: #858282;
@@ -323,8 +306,8 @@ a {
     grid-area: footer;
     background-color: rgb(153, 156, 146);
     width: 100%;
-    height: 15px;
-    font-size: 0.5em;
+    height: 30px;
+    font-size: 1em;
     display: flex;
     flex-direction: row;
     font-weight: 300;

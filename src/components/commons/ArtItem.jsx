@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
-export function ArtItem(props){
- //const producto = props.producto; //aca paso TODO el objeto a la variable producto
+export function ArtItem(props){ 
  const id = props.id //obtengo el ID para pasar al JSON
  const codigo = props.codigo // aca llamo al atributo codigo del objeto producto
  const imagen = props.imagen // aca llamo al atributo imagen del objeto producto
