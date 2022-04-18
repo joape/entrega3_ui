@@ -4,8 +4,10 @@ import { api } from "../../api/api";
 import { Link } from "react-router-dom";
 
 export function ArtItemDetail(){//aca se va a conectar a la BBDD y traera los productos
-  
-    const {id} = useParams(); //capturo el parametro. Si saco el id de entre las llaves no carga las imagenes
+    
+    //capturo el parametro. Si saco el id de entre las llaves no carga las imagenes 
+    //porque estoy pasando un objeto
+    const {id} = useParams(); 
     //console.log(id)//
     
     const [Producto, setProducto] = useState([]);
@@ -13,7 +15,7 @@ export function ArtItemDetail(){//aca se va a conectar a la BBDD y traera los pr
     //Voy a buscar la informacion al servidor
     useEffect(() => {
         //Fetch / GET a JSON Servilletas
-        api.get("/producto/" + id).then(function (response) {
+        api.get("/productos/" + id).then(function (response) {
         const prod = response.data;
         //console.log(prod);        
         setProducto(prod);//Cambiamos el estado para que react lo re dibuje
@@ -29,7 +31,7 @@ export function ArtItemDetail(){//aca se va a conectar a la BBDD y traera los pr
     const tam = Producto.tamaño;
     const cant = Producto.cantidad;
     const precio = Producto.precio;
-
+console.log(imagen);
     return (
     <div className="articulos">        
         <article className="articulo">
