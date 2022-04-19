@@ -14,7 +14,7 @@ return(
                 <img src={lupa} alt="Ingrese codigo de servilleta"></img>
                 <input name="buscar" type="text"></input>
             </div>
-            <div className="search">Login</div>
+            <div className="search"><Link to="/login">Login</Link></div>
         </header>
     );
 }

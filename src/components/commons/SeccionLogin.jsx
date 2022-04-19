@@ -34,13 +34,16 @@ export function SeccionLogin(){
         };
 
         //Llamar un POST con axios a /login y mandar la info en el estado actual. 
-        api.post("/usuarios", data).then((response) => {
+        api.post("/auth/login", data).then(
+            (response) => {
                 console.log(response);
 
             //Cambiar el estado de loading a false cuando me responde OK la API
             setLoading(false);
         },
         (errorResponse) => {
+
+            //console.log(errorResponse.response.data);
             //Guardamos la respuesta de la api en una constante
             const response = errorResponse.response.data;
 
@@ -49,7 +52,7 @@ export function SeccionLogin(){
 
             //Cambiar el estado loading a false
             setLoading(false);
-        });    
+        });
     };
 
     //Maneja estados del Formulario
@@ -93,7 +96,10 @@ export function SeccionLogin(){
                         <button type="submit" className="btnlogin">
                             {loading ? "Validando" : "Login"} 
                         </button>
-                        <span className="text-danger d-block"></span>                     
+                                             
+                    </div>
+                    <div className="cont2">
+                        <span className="text-danger d-block">{error}</span>
                     </div>
                 </form>                                        
             </div> 
