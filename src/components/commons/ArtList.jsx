@@ -21,7 +21,7 @@ export function ArtList(){
     /*Funcion que mapea cada elemento del array*/
     const artItems = listadoProds.map(function (prod) {   
         return(
-         <ArtItem key={prod.id} id={prod.id} codigo={prod.codigo} imagen={prod.imagen} />);/*Aca a cada item de ArtItem le pasaba el objeto entero, no es necesario, solo se pasa id, codigo e imagen*/
+         <ArtItem key={prod.id} id={prod.id_producto} codigo={prod.codigo} imagen={prod.imagen} />);/*Aca a cada item de ArtItem le pasaba el objeto entero, no es necesario, solo se pasa id, codigo e imagen*/
     });
    
     return(
