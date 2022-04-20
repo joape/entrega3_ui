@@ -37,7 +37,7 @@ export function SeccionLogin(){
         api.post("/auth/login", data).then(
             (response) => {
                 console.log(response);
-
+            //TODO: guardar el token
             //Cambiar el estado de loading a false cuando me responde OK la API
             setLoading(false);
         },
