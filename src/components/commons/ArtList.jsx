@@ -10,7 +10,7 @@ export function ArtList(){
     //Voy a buscar la informacion al servidor
     useEffect(() => {
         //Fetch / GET a JSON Servilletas antes, ahora a la API que se conecta a la BBDD
-        api.get("/productos").then((response)=> {
+        api.get("/productos?size=4").then((response)=> {
         const prods = response.data;
        
         //Cambiamos el estado para que react lo re dibuje con lo que trajo de la API
