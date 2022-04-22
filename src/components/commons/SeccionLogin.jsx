@@ -7,6 +7,7 @@ export function SeccionLogin() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false); //uso este estado para cambiar boton.
     const [error, setError] = useState("");
+    const [mensaje, setMensaje] = useState("");
 
     //El formulario se manda
     const handleSubmit = (event) => {
@@ -38,9 +39,13 @@ export function SeccionLogin() {
             (response) => {
                 console.log(response);
                 localStorage.setItem("token", response.data.token); //Guardo el token para que lo pida luego.
-                window.location.href = "/";
+
                 //Cambiar el estado de loading a false cuando me responde OK la API
                 setLoading(false);
+
+                //Muestro el mensaje
+                setMensaje(response.data.message);
+                window.location.href = "/";
             },
             (errorResponse) => {
 
@@ -100,7 +105,10 @@ export function SeccionLogin() {
 
                 </div>
                 <div className="cont2">
-                    <span className="text-danger d-block">{error}</span>
+                    <span>{error}</span>
+                </div>
+                <div className="mensajeOK">
+                    <span>{mensaje}</span>
                 </div>
             </form>
         </div>

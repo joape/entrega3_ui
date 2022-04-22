@@ -5,7 +5,7 @@ import { NavBar } from './NavBar';
 import { Link } from 'react-router-dom';
 
 export function Header() {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token"); //Traigo el token de la LocalStorage
 
     const logout = () => {
         localStorage.removeItem("token");
@@ -21,6 +21,7 @@ export function Header() {
                 <img src={lupa} alt="Ingrese codigo de servilleta"></img>
                 <input name="buscar" type="text"></input>
             </div>
+            <div clasename="search"><Link to="/usuario/alta">Registrarse</Link></div>
             <div className="search">{token ? <a href="#" onClick={logout}>Logout</a> : <Link to="/login">Login</Link>}</div>
         </header>
     );
