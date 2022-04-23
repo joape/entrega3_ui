@@ -21,7 +21,7 @@ export function Header() {
                 <img src={lupa} alt="Ingrese codigo de servilleta"></img>
                 <input name="buscar" type="text"></input>
             </div>
-            <div clasename="search"><Link to="/usuario/alta">Registrarse</Link></div>
+            <div clasename="search">{token ? <Link to="/producto/alta">Alta Producto</Link> : <Link to="/usuario/alta">Registrarse</Link>}</div>
             <div className="search">{token ? <a href="#" onClick={logout}>Logout</a> : <Link to="/login">Login</Link>}</div>
         </header>
     );
