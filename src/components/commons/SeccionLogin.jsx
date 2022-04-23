@@ -39,6 +39,7 @@ export function SeccionLogin() {
             (response) => {
                 console.log(response);
                 localStorage.setItem("token", response.data.token); //Guardo el token para que lo pida luego.
+                localStorage.setItem("admin", response.data.admin);
 
                 //Cambiar el estado de loading a false cuando me responde OK la API
                 setLoading(false);

@@ -8,7 +8,7 @@ export function Header() {
     const token = localStorage.getItem("token"); //Traigo el token de la LocalStorage
 
     const logout = () => {
-        localStorage.removeItem("token");
+        localStorage.clear();
         window.location.reload();
     }
 

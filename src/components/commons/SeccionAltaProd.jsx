@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../../api/api";
 
 export function SeccionAltaProd() {
     //defino las variables para los estados - Nos permite redibujar en el formulario
-    const [categoria, setCategoria] = useState("");
+    const [categoria, setCategoria] = useState("");///este es el del select
+    const [options, setOptions] = useState([])/// este es para manejar las opciones del select
     const [codigo, setCodigo] = useState("");
     const [origen, setOrigen] = useState("");
     const [tamaño, setTamaño] = useState("");
@@ -13,6 +14,29 @@ export function SeccionAltaProd() {
     const [loading, setLoading] = useState(false); //uso este estado para cambiar boton.
     const [error, setError] = useState("");
     const [mensaje, setMensaje] = useState("");
+
+    useEffect(() => {
+        api.get('/categorias').then((response) => { //Fetch / GET a JSON Servilletas antes, ahora a la API que se conecta a la BBDD
+            const categorias = response.data;
+            setOptions(categorias); ///podria usar response.data.message.
+        },
+            (errorResponse) => {
+                //console.log(errorResponse.response.data);
+                //Guardamos la respuesta de la api en una constante
+                const response = errorResponse.response.data;
+
+                //Cambiamos el estado para mostrar el error
+                setError(response.error);
+
+                //Cambiar el estado loading a false
+                setLoading(false);
+            });
+    }, [])/*Pongo un array vacio al final para que se ejecute una sola vez */
+
+
+    // const listCateg = respuesta.map(function (categoria) {
+    //     return (<option key={categ.id} value={categ.id}> {categ.nombre}</option>);/*Paso id y nombre*/
+    // });
 
     //El formulario se manda
     const handleSubmit = (event) => {
@@ -43,6 +67,16 @@ export function SeccionAltaProd() {
                 console.log(respuesta);
                 //Cambiar el estado de loading a false cuando me responde OK la API
                 setLoading(false);
+
+                //borro los inputs si esta todo ok
+                setCategoria("");
+                setCodigo("");
+                setOrigen("");
+                setTamaño("");
+                setStock("");
+                setPrecio("");
+                setFoto("");
+
                 setMensaje(respuesta.message); ///podria usar response.data.message.
             },
             (errorResponse) => {
@@ -95,15 +129,10 @@ export function SeccionAltaProd() {
                 <h2 className="titulo">ALTA PRODUCTO</h2>
                 <div className="cont">
                     <label htmlFor="prod-categoria">Categoria:</label>
-                    <input
-                        value={categoria}
-                        onChange={handleCategoriaChange}
-                        name="categoria"
-                        type="number"
-                        id="prod-categoria"
-                        placeholder="Selecciones la categoria"
-                        required
-                    />
+                    <select onChange={handleCategoriaChange} value={categoria} name="categoria" id="prod-categoria" required>
+                        <option value="">Seleccionar categoria</option>
+                        {options.map((option) => (<option key={option.id_categoria} value={option.id_categoria}>{option.nombre}</option>))}
+                    </select>
                 </div>
                 <div className="cont">
                     <label htmlFor="prod-code">Codigo:</label>
@@ -185,7 +214,7 @@ export function SeccionAltaProd() {
                 <div className="cont2">
                     <span>{error}</span>
                 </div>
-                <div className="cont2">
+                <div className="mensajeOK">
                     <span>{mensaje}</span>
                 </div>
             </form>
