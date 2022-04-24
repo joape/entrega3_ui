@@ -6,6 +6,8 @@ import { ItemDetail } from "./components/pages/ItemDetail";
 import { LoginPage } from "./components/pages/LoginPage";
 import { AltaProdPage } from "./components/pages/AltaProdPage";
 import { AltaUserPage } from "./components/pages/AltaUserPage";
+import { ListadoCategoria } from "./components/pages/ListadoCategoria";
+import { ModProdPage } from "./components/pages/ModProdPage";
 
 export function App() {
     return (
@@ -17,7 +19,9 @@ export function App() {
                     <Route path="/detail/:id" element={<ItemDetail />} />
                     <Route path="/login/" element={<LoginPage />} />
                     <Route path="/producto/alta" element={<AltaProdPage />} />
+                    <Route path="/producto/update/:id" element={<ModProdPage />} />
                     <Route path="/usuario/alta" element={<AltaUserPage />} />
+                    <Route path="/categoria/:id" element={<ListadoCategoria />} />
                 </Routes>
             </main>
             <Footer />

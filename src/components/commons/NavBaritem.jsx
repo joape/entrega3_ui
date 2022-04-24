@@ -5,6 +5,6 @@ export function NavBarItem(props) {
     const nombre = props.nombre // aca llamo al atributo nombre del objeto producto
     //console.log(props.id);
     return (
-        <li><Link to={`/#/${id}`}>{nombre}</Link></li>
+        <li><Link to={`/categoria/${id}`}>{nombre}</Link></li>
     );
 }

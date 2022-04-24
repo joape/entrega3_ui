@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
 import { api } from "../../api/api";
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-export function SeccionAltaProd() {
+export function SeccionModProd() {
   let navigate = useNavigate();
   const isAdmin = localStorage.getItem("admin") === "1"; //Traigo el token de la LocalStorage
 
   if (!isAdmin) {
     navigate("/", { replace: true });
   }
+
+  //capturo el parametro. Si saco el id de entre las llaves no carga las imagenes
+  //porque estoy pasando un objeto
+  const { id } = useParams();
+  //console.log(id)//
 
   //defino las variables para los estados - Nos permite redibujar en el formulario
   const [categoria, setCategoria] = useState(""); ///este es el del select
@@ -22,6 +28,7 @@ export function SeccionAltaProd() {
   const [loading, setLoading] = useState(false); //uso este estado para cambiar boton.
   const [error, setError] = useState("");
   const [mensaje, setMensaje] = useState("");
+  const [imagen, setImagen] = useState("");
 
   useEffect(() => {
     api.get("/categorias").then(
@@ -42,7 +49,38 @@ export function SeccionAltaProd() {
         setLoading(false);
       }
     );
-  }, []); /*Pongo un array vacio al final para que se ejecute una sola vez */
+
+    //Fetch / GET al producto
+    api.get("/productos/" + id).then(
+      function (response) {
+        const prod = response.data;
+        //console.log(prod);
+
+        setCategoria(prod.id_categoria); ///este es el del select
+        setCodigo(prod.codigo);
+        setOrigen(prod.origen);
+        setTamaño(prod.tamaño);
+        setStock(prod.stock);
+        setPrecio(prod.precio);
+        setImagen(prod.imagen);
+      },
+      (errorResponse) => {
+        //console.log(errorResponse.response.data);
+        //Guardamos la respuesta de la api en una constante
+        const response = errorResponse.response.data;
+
+        //Cambiamos el estado para mostrar el error
+        setError(response.error);
+
+        //Cambiar el estado loading a false
+        setLoading(false);
+      }
+    );
+  }, [id]); /*Pongo un array vacio al final para que se ejecute una sola vez */
+
+  if (!categoria) {
+    return "Cargando";
+  }
 
   //El formulario se manda
   const handleSubmit = (event) => {
@@ -66,24 +104,19 @@ export function SeccionAltaProd() {
     setError("");
     setMensaje("");
 
-    //Llamar un POST con axios a /login y mandar la info en el estado actual.
-    api.post("/productos", formData).then(
+    //Llamar un PUT con axios a /login y mandar la info en el estado actual.
+    api.put("/productos/" + id, formData).then(
       (response) => {
         const respuesta = response.data;
         console.log(respuesta);
         //Cambiar el estado de loading a false cuando me responde OK la API
         setLoading(false);
 
-        //borro los inputs si esta todo ok
-        setCategoria("");
-        setCodigo("");
-        setOrigen("");
-        setTamaño("");
-        setStock("");
-        setPrecio("");
-        setFoto("");
-
         setMensaje(respuesta.message); ///podria usar response.data.message.
+
+        if (respuesta.datos.imagen) {
+          setImagen(respuesta.datos.imagen);
+        }
       },
       (errorResponse) => {
         //console.log(errorResponse.response.data);
@@ -139,7 +172,7 @@ export function SeccionAltaProd() {
     <div className="login">
       <div className="login caja">
         <form onSubmit={handleSubmit}>
-          <h2 className="titulo">ALTA PRODUCTO</h2>
+          <h2 className="titulo">MODIFICACION DE PRODUCTO</h2>
           <div className="cont">
             <label htmlFor="prod-categoria">Categoria:</label>
             <select
@@ -226,8 +259,15 @@ export function SeccionAltaProd() {
               name="foto"
               id="prod-foto"
               placeholder="Ingresa una foto"
-              required
             />
+            <div>
+              <img
+                src={"http://localhost:4000/uploads/" + imagen}
+                alt="Imagen no carga"
+                height="50px"
+                width="50px"
+              ></img>
+            </div>
           </div>
           <div className="cont2">
             <button type="submit" className="btnlogin">
